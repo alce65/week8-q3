@@ -3,7 +3,9 @@
 TS - Eslint - Jest
 Node - Express - Mongoose
 
-## Setup inicial: TS - Eslint - Jest
+## Setup
+
+### Setup inicial: TS - Eslint - Jest
 
 - npm init
 - git init
@@ -83,7 +85,7 @@ export default {
 };
 ```
 
-## Setup Node: Express - Mongoose
+### Setup Node: Express - Mongoose
 
 ```shell
 npm i -D nodemon
@@ -96,3 +98,42 @@ npm i -D @types/mongoose
 npm i bcrypt jsonwebtoken
 npm i - D @types/bcrypt @types/jsonwebtoken
 ```
+
+## Basic server
+
+## Node server
+
+- debug -> NameSpace W7E:Index
+- dotenv config
+
+- PORT from process.env or default value
+- create server with express app
+
+- server listen
+- server on events:
+  - listening -> address() + console
+  - error -> console + exit(-1)
+
+## Express App
+
+- debug -> NameSpace W7E:App
+- app -> express()
+
+- middleware
+  - morgan
+  - cors
+  - express.json
+  - express.static
+
+- public content
+  - favicon.ico / svg
+  - index.html
+  - style.css
+
+route for all others -> next(HttpError)
+
+## Error Management
+
+class HttpError extends Error
+
+Error Middleware -> res.json()

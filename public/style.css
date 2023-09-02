@@ -1,0 +1,18 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+header {
+  background-color: maroon;
+  color: bisque;
+  padding: 2rem;
+}
+main {
+  padding: 2rem;
+}
