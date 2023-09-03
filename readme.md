@@ -171,3 +171,17 @@ Error Middleware -> res.json()
 - isAdmin middleware factory
   - params: usersRepo
 
+## Cloudinary Media Files Management
+
+- sdk instal
+
+```shell
+  npm i cloudinary
+```
+
+- .env variable
+- service
+  - constructor: configure and connect with Cloudinary
+  - extra type for cloudinary error
+  - uploadFile method -> data with extra type for imgData
+
