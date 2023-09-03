@@ -158,7 +158,9 @@ Error Middleware -> res.json()
 - entity & extra type for id
 - mongoose schema & model
 - mongo.repository
-- controller & auth service & extra type for token payload
+- controller & auth service
+  - extra type for token payload
+  - test auth service
 - router
 - add route in app
 
@@ -184,4 +186,5 @@ Error Middleware -> res.json()
   - constructor: configure and connect with Cloudinary
   - extra type for cloudinary error
   - uploadFile method -> data with extra type for imgData
+
 

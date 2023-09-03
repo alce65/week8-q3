@@ -1,7 +1,11 @@
+import createDebug from 'debug';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { HttpError } from '../types/http.error.js';
 import { TokenPayload } from '../types/token.js';
+
+const debug = createDebug('W7E:Services:Auth');
+debug('Loaded');
 
 export class Auth {
   private static secret = process.env.TOKEN_SECRET!;
