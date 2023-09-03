@@ -161,3 +161,13 @@ Error Middleware -> res.json()
 - controller & auth service & extra type for token payload
 - router
 - add route in app
+
+## Auth interceptors
+
+- authorization (isLogged) middleware
+  - add logged user validateID to body
+- authentication (isOwner) middleware factory
+  - params: itemsRepo, ownerField
+- isAdmin middleware factory
+  - params: usersRepo
+
