@@ -3,14 +3,17 @@ import { Repository } from '../repository/repository.js';
 import createDebug from 'debug';
 import { LoginData, User } from '../entities/user.js';
 import { Request, Response, NextFunction } from 'express';
-import { HttpError } from '../types/http.error.js';
+import { HttpError } from '../types/errors.js';
 import { Auth } from '../services/auth.js';
 import { TokenPayload } from '../types/token.js';
+import { CloudinaryService } from '../services/media.files.js';
 const debug = createDebug('W7E:Controller:UsersController');
 
 export class UsersController extends AnyController<User> implements Controller {
+  cloudinary: CloudinaryService;
   constructor(protected repo: Repository<User>) {
     super(repo);
+    this.cloudinary = new CloudinaryService();
     debug('Instantiated');
   }
 
@@ -43,6 +46,10 @@ export class UsersController extends AnyController<User> implements Controller {
   async create(req: Request, res: Response, next: NextFunction) {
     try {
       req.body.passwd = await Auth.hash(req.body.passwd);
+
+      const imageData = await this.cloudinary.uploadImage(req.body.imageUrl);
+      req.body.imageData = imageData;
+      debug(imageData);
     } catch (error) {
       next(error);
       return;

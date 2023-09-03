@@ -1,5 +1,5 @@
 import { Schema, model } from 'mongoose';
-import { User } from '../entities/user';
+import { User } from '../entities/user.js';
 
 const userSchema = new Schema<User>({
   userName: {
@@ -30,6 +30,15 @@ const userSchema = new Schema<User>({
   isAlive: {
     type: Boolean,
     default: true,
+  },
+  imageData: {
+    type: {
+      publicId: { type: String },
+      width: { type: Number },
+      height: { type: Number },
+      format: { type: String },
+      url: { type: String },
+    },
   },
 });
 

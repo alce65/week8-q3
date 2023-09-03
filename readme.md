@@ -187,4 +187,13 @@ Error Middleware -> res.json()
   - extra type for cloudinary error
   - uploadFile method -> data with extra type for imgData
 
+## Add image in user registration
 
+- entity user with extra type for imgData
+- mongoose schema with the structure of imgData
+
+- assets folder with sample image
+
+- userController
+  - instantiate CloudinaryService
+  - use uploadImage method from the service
