@@ -137,3 +137,12 @@ route for all others -> next(HttpError)
 class HttpError extends Error
 
 Error Middleware -> res.json()
+
+## Mongoose DB Connection
+
+- .env -> user & passwd
+- dbConnect function: return mongoose.connect(uri)
+- use dbConnect function in server
+  - then: server.listen + console connection info
+
+- Add Mongoose errors in error management

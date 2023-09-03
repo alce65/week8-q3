@@ -2,11 +2,13 @@ import express, { NextFunction, Request, Response } from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
 import createDebug from 'debug';
-import { errorMiddleware } from './middleware/error.middleware.js';
+import { ErrorMiddleware } from './middleware/error.middleware.js';
 import { HttpError } from './types/http.error.js';
 
 const debug = createDebug('W7E:App');
 export const app = express();
+
+const errorMiddleware = new ErrorMiddleware();
 
 debug('Started');
 
@@ -21,4 +23,4 @@ app.use('/:id', (req: Request, res: Response, next: NextFunction) => {
   next(error);
 });
 
-app.use(errorMiddleware);
+app.use(errorMiddleware.manageErrors.bind(errorMiddleware));

@@ -3,6 +3,7 @@ import 'dotenv/config';
 import { app } from './app.js';
 import createDebug from 'debug';
 import { exit } from 'process';
+import { dbConnect } from './db/db.connect.js';
 
 const debug = createDebug('W7E:Index');
 debug('Started');
@@ -10,7 +11,14 @@ const PORT = process.env.PORT || 3000;
 
 const server = createServer(app);
 
-server.listen(PORT);
+dbConnect()
+  .then((mongoose) => {
+    server.listen(PORT);
+    debug('Connected to DB:', mongoose.connection.db.databaseName);
+  })
+  .catch((error) => {
+    server.emit('error', error);
+  });
 
 server.on('listening', () => {
   const addressInfo = server.address();
