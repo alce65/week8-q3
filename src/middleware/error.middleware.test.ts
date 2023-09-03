@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { ErrorMiddleware } from './error.middleware';
-import { HttpError } from '../types/http.error';
+import { HttpError } from '../types/errors';
 
 describe('Given ErrorMiddleware class', () => {
   describe('When we instantiate it', () => {

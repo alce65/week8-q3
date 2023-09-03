@@ -1,7 +1,7 @@
 import createDebug from 'debug';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import { HttpError } from '../types/http.error.js';
+import { HttpError } from '../types/errors.js';
 import { TokenPayload } from '../types/token.js';
 
 const debug = createDebug('W7E:Services:Auth');

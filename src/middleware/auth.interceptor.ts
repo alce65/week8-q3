@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import createDebug from 'debug';
 import { Auth } from '../services/auth.js';
-import { HttpError } from '../types/http.error.js';
+import { HttpError } from '../types/errors.js';
 import { Repository } from '../repository/repository.js';
 import { WithId } from '../types/id.js';
 import { User } from '../entities/user.js';

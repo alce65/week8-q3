@@ -1,7 +1,7 @@
 import { AuthInterceptor } from './auth.interceptor';
 import { Request, Response } from 'express';
 import { Auth } from '../services/auth.js';
-import { HttpError } from '../types/http.error';
+import { HttpError } from '../types/errors';
 import { User } from '../entities/user';
 import { Repository } from '../repository/repository';
 

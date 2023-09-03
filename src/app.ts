@@ -3,7 +3,7 @@ import cors from 'cors';
 import morgan from 'morgan';
 import createDebug from 'debug';
 import { ErrorMiddleware } from './middleware/error.middleware.js';
-import { HttpError } from './types/http.error.js';
+import { HttpError } from './types/errors.js';
 import { UsersMongoRepository } from './repository/users.mongo.repository.js';
 import { UsersController } from './controller/users.controller.js';
 import { UsersRouter } from './router/users.router.js';

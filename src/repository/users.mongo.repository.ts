@@ -2,7 +2,7 @@ import createDebug from 'debug';
 import { User } from '../entities/user.js';
 import { Repository } from './repository.js';
 import { UserModel } from './users.mongo.model.js';
-import { HttpError } from '../types/http.error.js';
+import { HttpError } from '../types/errors.js';
 const debug = createDebug('W7E:Repo:UsersMongoRepo');
 
 export class UsersMongoRepository implements Repository<User> {

@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 import createDebug from 'debug';
 import cloudinaryBase from 'cloudinary';
-import { CloudinaryError, HttpError } from '../types/http.error.js';
+import { CloudinaryError, HttpError } from '../types/errors.js';
 import { ImgData } from '../types/image.js';
 
 const debug = createDebug('W7E:Services:MediaFiles');
