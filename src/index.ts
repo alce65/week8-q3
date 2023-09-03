@@ -37,6 +37,7 @@ server.on('listening', () => {
         : `port ${addressInfo?.port}`;
   }
 
+  debug('Listening');
   console.log(`Listening on ${bind}`);
 });
 

@@ -146,3 +146,18 @@ Error Middleware -> res.json()
   - then: server.listen + console connection info
 
 - Add Mongoose errors in error management
+
+## All Endpoints
+
+- Repository interface
+- Controller interface
+- AnyController abstract class
+
+## Users Endpoint
+
+- entity & extra type for id
+- mongoose schema & model
+- mongo.repository
+- controller & auth service & extra type for token payload
+- router
+- add route in app
