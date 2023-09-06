@@ -175,7 +175,7 @@ Error Middleware -> res.json()
 
 ## Cloudinary Media Files Management
 
-- sdk instal
+- sdk install
 
 ```shell
   npm i cloudinary
@@ -197,3 +197,12 @@ Error Middleware -> res.json()
 - userController
   - instantiate CloudinaryService
   - use uploadImage method from the service
+
+## Move dotenv access to config file (Optional)
+
+- create config.ts file
+  - import dotenv
+  - read .env variables
+  - export constants for .env values
+
+Only when needed for solve .env access problems
