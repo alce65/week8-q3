@@ -47,4 +47,13 @@ export class CloudinaryService {
       throw httpError;
     }
   }
+
+  resizeImage(imageData: ImgData) {
+    return this.cloudinary.url(imageData.publicId, {
+      transformation: {
+        width: 200,
+        crop: 'scale',
+      },
+    });
+  }
 }

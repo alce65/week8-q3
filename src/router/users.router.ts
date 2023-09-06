@@ -1,21 +1,49 @@
+/* eslint-disable no-unused-vars */
 import express, { Router as createRouter } from 'express';
 import createDebug from 'debug';
 import { UsersController } from '../controller/users.controller.js';
+import { FilesInterceptor } from '../middleware/files.interceptor.js';
+import { AuthInterceptor } from '../middleware/auth.interceptor.js';
+import { CloudinaryService } from '../services/media.files.js';
 
 const debug = createDebug('W7E:Router:UsersRouter');
 
 export class UsersRouter {
   router: express.Router;
-  // eslint-disable-next-line no-unused-vars
-  constructor(private controller: UsersController) {
+
+  authInterceptor: AuthInterceptor;
+
+  constructor(
+    private controller: UsersController,
+    private filesInterceptor: FilesInterceptor
+  ) {
     debug('Instantiated');
     this.router = createRouter();
+    this.authInterceptor = new AuthInterceptor();
     this.configure();
   }
 
   configure() {
     this.router.patch('/login', this.controller.login.bind(this.controller));
-    this.router.post('/register', this.controller.create.bind(this.controller));
+    this.router.post(
+      '/register',
+      this.filesInterceptor.singleFileStore('avatar'),
+      this.controller.create.bind(this.controller)
+    );
+
+    this.router.post(
+      '/files',
+      this.authInterceptor.authorization.bind(this.authInterceptor),
+      this.filesInterceptor.singleFileStore('avatar'),
+      async (req, res, _NExt) => {
+        const cloudinary = new CloudinaryService();
+        const finalPath = req.file!.destination + '/' + req.file!.filename;
+        req.body.avatar = await cloudinary.uploadImage(finalPath);
+        const url200 = cloudinary.resizeImage(req.body.avatar);
+        debug(url200);
+        res.json(req.body);
+      }
+    );
 
     this.router.get('/', this.controller.getAll.bind(this.controller));
     this.router.get('/:id', this.controller.getById.bind(this.controller));

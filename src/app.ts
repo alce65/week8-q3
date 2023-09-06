@@ -9,6 +9,7 @@ import { UsersController } from './controller/users.controller.js';
 import { UsersRouter } from './router/users.router.js';
 import { User } from './entities/user.js';
 import { Repository } from './repository/repository.js';
+import { FilesInterceptor } from './middleware/files.interceptor.js';
 
 const debug = createDebug('W7E:App');
 export const app = express();
@@ -21,9 +22,11 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static('public'));
 
+const filesInterceptor = new FilesInterceptor();
+
 const userRepo: Repository<User> = new UsersMongoRepository();
 const userController: UsersController = new UsersController(userRepo);
-const userRouter = new UsersRouter(userController);
+const userRouter = new UsersRouter(userController, filesInterceptor);
 app.use('/users', userRouter.router);
 
 app.use('/:id', (req: Request, res: Response, next: NextFunction) => {

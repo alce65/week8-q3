@@ -206,3 +206,22 @@ Error Middleware -> res.json()
   - export constants for .env values
 
 Only when needed for solve .env access problems
+
+## Upload image form frontend using Multer
+
+install Multer
+
+```shell
+  npm i multer
+  npm i -D @types/multer
+```
+
+- add uploads to .gitignore
+- create FileIntercepto with multerCode
+- from app, instantiate and inject interceptor in userRouter
+
+- add test route: /users/files in user.router
+- add interceptor in /users/register
+- move cloudinaryService use to UsersController
+
+- prove service for generate transform url in MediaFiles Service

@@ -1,4 +1,5 @@
 import { UsersController } from '../controller/users.controller';
+import { FilesInterceptor } from '../middleware/files.interceptor';
 import { UsersRouter } from './users.router';
 
 describe('Given UsersRouter', () => {
@@ -13,7 +14,10 @@ describe('Given UsersRouter', () => {
       delete: jest.fn(),
     } as unknown as UsersController;
 
-    const router = new UsersRouter(controller);
+    const router = new UsersRouter(
+      controller,
+      (() => {}) as unknown as FilesInterceptor
+    );
     test('Then it should ...', () => {
       expect(router).toBeInstanceOf(UsersRouter);
       expect(Function.prototype.bind).toHaveBeenCalledTimes(6);
