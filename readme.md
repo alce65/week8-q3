@@ -225,3 +225,5 @@ install Multer
 - move cloudinaryService use to UsersController
 
 - prove service for generate transform url in MediaFiles Service
+
+- create a simple vanilla frontend for registering users
