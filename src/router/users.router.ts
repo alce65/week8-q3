@@ -40,7 +40,10 @@ export class UsersRouter {
       '/files',
       this.authInterceptor.authorization.bind(this.authInterceptor),
       this.filesInterceptor.singleFileStore('avatar'),
-      async (req, res, _NExt) => {
+
+      // Sample controller for test cloudinary
+      // not testable in this way
+      async (req, res, _next) => {
         const cloudinary = new CloudinaryService();
         const finalPath = req.file!.destination + '/' + req.file!.filename;
         req.body.avatar = await cloudinary.uploadImage(finalPath);

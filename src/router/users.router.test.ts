@@ -1,5 +1,6 @@
 /* eslint-disable no-labels */
 /* eslint-disable no-unused-labels */
+import { NextFunction, Request, Response } from 'express';
 import { UsersController } from '../controller/users.controller';
 import { FilesInterceptor } from '../middleware/files.interceptor';
 import { UsersRouter } from './users.router';
@@ -16,13 +17,17 @@ describe('Given UsersRouter', () => {
       delete: jest.fn(),
     } as unknown as UsersController;
 
-    FilesInterceptor.prototype.singleFileStore = jest
-      .fn()
-      .mockReturnValue(() => {});
-
-    const mockFileInterceptor = new FilesInterceptor();
+    const mockFileInterceptor = {
+      singleFileStore: jest
+        .fn()
+        .mockImplementation(
+          () => (_req: Request, _res: Response, next: NextFunction) => {
+            next();
+          }
+        ),
+    } as FilesInterceptor;
     const router = new UsersRouter(controller, mockFileInterceptor);
-    test('Then it should ...', () => {
+    test('Then it should register all routes', () => {
       expect(router).toBeInstanceOf(UsersRouter);
       expect(Function.prototype.bind).toHaveBeenCalledTimes(9);
     });
