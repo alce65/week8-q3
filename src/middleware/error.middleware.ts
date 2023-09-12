@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import createDebug from 'debug';
 import { HttpError } from '../types/errors.js';
 import mongoose from 'mongoose';
+import { ValidationError } from 'express-validation';
 const debug = createDebug('W7E:Middleware:Error');
 
 export class ErrorMiddleware {
@@ -24,6 +25,10 @@ export class ErrorMiddleware {
     if (error instanceof HttpError) {
       res.status(error.status);
       res.statusMessage = error.statusMessage;
+      type = 'Http Error';
+    } else if (error instanceof ValidationError) {
+      res.status(406);
+      res.statusMessage = 'Not accepted';
       type = 'Http Error';
     } else if (error instanceof mongoose.Error.ValidationError) {
       res.status(400);

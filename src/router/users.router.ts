@@ -5,13 +5,14 @@ import { UsersController } from '../controller/users.controller.js';
 import { FilesInterceptor } from '../middleware/files.interceptor.js';
 import { AuthInterceptor } from '../middleware/auth.interceptor.js';
 import { CloudinaryService } from '../services/media.files.js';
+import { ValidationInterceptor } from '../middleware/validation.interceptor.js';
 
 const debug = createDebug('W7E:Router:UsersRouter');
 
 export class UsersRouter {
   router: express.Router;
-
   authInterceptor: AuthInterceptor;
+  validationInterceptor: ValidationInterceptor;
 
   constructor(
     private controller: UsersController,
@@ -20,6 +21,7 @@ export class UsersRouter {
     debug('Instantiated');
     this.router = createRouter();
     this.authInterceptor = new AuthInterceptor();
+    this.validationInterceptor = new ValidationInterceptor();
     this.configure();
   }
 
@@ -28,6 +30,9 @@ export class UsersRouter {
     this.router.post(
       '/register',
       this.filesInterceptor.singleFileStore('avatar'),
+      this.validationInterceptor
+        .registerValidator()
+        .bind(this.validationInterceptor),
       this.controller.create.bind(this.controller)
     );
 
