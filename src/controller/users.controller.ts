@@ -46,7 +46,15 @@ export class UsersController extends AnyController<User> implements Controller {
   async create(req: Request, res: Response, next: NextFunction) {
     try {
       req.body.passwd = await Auth.hash(req.body.passwd);
-      const finalPath = req.file!.destination + '/' + req.file!.filename;
+      if (!req.file) {
+        throw new HttpError(
+          400,
+          'Bad Request',
+          'No avatar image for registration'
+        );
+      }
+
+      const finalPath = req.file.destination + '/' + req.file!.filename;
       const imageData = await this.cloudinary.uploadImage(finalPath);
       // Delete await fs.unlink(finalPath);
       req.body.imageData = imageData;
